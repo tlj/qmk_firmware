@@ -57,6 +57,13 @@ combo_t key_combos[] = {
 // for transporting keypresses between halves
 bool should_process_keypress(void) { return true; }
 
+void keyboard_pre_init_user(void) {
+    // set liatris led pin as output
+    setPinOutput(24);
+    // Turn the led off
+    writePinHigh(24);
+}
+
 #ifdef RGBLIGHT_ENABLE
 void keyboard_post_init_user(void) {
   rgblight_enable_noeeprom(); // enables RGB, without saving settings
@@ -208,7 +215,6 @@ bool oled_task_user(void) {
     static const char PROGMEM up_arrow[] = {0x18, 0};
     static const char PROGMEM right_arrow[] = {0x1A, 0};
 
-    oled_clear();
     oled_set_cursor(0, 1);
 
     switch (get_highest_layer(layer_state)) {
@@ -233,7 +239,7 @@ bool oled_task_user(void) {
             break;
         case _NAVI:
             if (is_keyboard_master()) {
-                oled_write("Navi ", false);
+                oled_write("Navi          ", false);
             } else {
                 oled_write_P("     ", false);
                 oled_write_P(left_arrow, false);
@@ -246,7 +252,7 @@ bool oled_task_user(void) {
             break;
         case _MEDIA:
             if (is_keyboard_master()) {
-                oled_write("Media", false);
+                oled_write("Media          ", false);
             }
             break;
     }

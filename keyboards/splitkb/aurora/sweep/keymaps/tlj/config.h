@@ -19,7 +19,7 @@
 // Not yet available in `keymap.json` format
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
-#    define RGB_DISABLE_AFTER_TIMEOUT 1000
+#    define RGB_MATRIX_TIMEOUT 120000
 #    define RGB_MATRIX_STARTUP_MODE RBG_MATRIX_JELLYBEANS_RAINDROPS
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
@@ -28,6 +28,10 @@
 #    define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #    define ENABLE_RGB_MATRIX_RAINBOW_BEACON
 #    define ENABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
+#endif
+
+#ifdef OLED_ENABLE
+#    define OLED_TIMEOUT 120000
 #endif
 
 // Not yet available in `keymap.json` format
