@@ -43,5 +43,6 @@
 #endif
 
 #define SPLIT_TRANSPORT_MIRROR
+#define NO_AUTO_SHIFT_ALPHA
 
 
