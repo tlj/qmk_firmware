@@ -31,7 +31,10 @@
 #endif
 
 #ifdef OLED_ENABLE
+//   Turn off oled after 2 minutes of inactivity
 #    define OLED_TIMEOUT 120000
+//   Enable transmuttung the current oled on/off status to slave
+#    define SPLIT_OLED_ENABLE
 #endif
 
 // Not yet available in `keymap.json` format
@@ -51,7 +54,18 @@
 #   define RGBLIGHT_EFFECT_BREATHING
 #endif
 
+// Enable transmitting modifier state to slave for oled display
+#define SPLIT_MODS_ENABLE
+// Enable syncing of layer state for oled display on slave
+#define SPLIT_LAYER_STATE_ENABLE
+// Mirror master side matrix to slave for features to react (rgb/oled)
 #define SPLIT_TRANSPORT_MIRROR
+// Disable auto shift functionality for alpha characters
 #define NO_AUTO_SHIFT_ALPHA
+
+#ifdef WPM_ENABLE
+//  Enable transmitting the current WPM to slave for oled display/anim
+#   define SPLIT_WPM_ENABLE
+#endif
 
 

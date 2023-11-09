@@ -1,4 +1,7 @@
 #include QMK_KEYBOARD_H
+#include "bongo.c"
+#include <stdio.h>
+char wpm_str[10];
 
 enum layers {
     _DEFAULT,
@@ -8,6 +11,14 @@ enum layers {
     _MEDIA,
     _MOUSE,
 };
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_180;
+    }
+
+    return rotation;
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT(
@@ -216,56 +227,83 @@ void render_mod_status_ctrl_shift_tlj(uint8_t modifiers) {
 }
 
 bool oled_task_user(void) {
+    if (!is_keyboard_master()) {
+        render_anim();
+        oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
+        sprintf(wpm_str, "WPM:%03d", get_current_wpm());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
+        oled_write(wpm_str, false);
+        return false;
+    }
+
     // A 128x32 OLED rotated 90 degrees is 5 characters wide and 16 characters tall
     static const char PROGMEM left_arrow[] = {0x1B, 0};
     static const char PROGMEM down_arrow[] = {0x19, 0};
     static const char PROGMEM up_arrow[] = {0x18, 0};
     static const char PROGMEM right_arrow[] = {0x1A, 0};
 
+    oled_clear();
     oled_set_cursor(0, 1);
 
     switch (get_highest_layer(layer_state)) {
         case _DEFAULT:
-            if (is_keyboard_master()) {
-                oled_write_P("qwertasdfgzxcvb", false);
-            } else {
-                oled_write_P("yuiophjkl;nm,. ", false);
-            }
+            oled_clear();
+            render_space_tlj();
+            render_space_tlj();
+
+            oled_write_P("qwertasdfgzxcvb", false);
+            render_space_tlj();
+
+            oled_write_P("yuiophjkl;nm,. ", false);
             break;
         case _SYMBOLS:
-            if (is_keyboard_master()) {
-                oled_write_P(" %{}^ @()$  []*", false);
-            } else {
-                oled_write_P(" `'  /:=\"  \\-  ", false);
-            }
+            oled_clear();
+            oled_write_P("Symbs", false);
+            render_space_tlj();
+
+            oled_write_P(" %{}^ @()$  []*", false);
+            render_space_tlj();
+
+            oled_write_P(" `'  /:=\"  \\-  ", false);
+
             break;
         case _NUMBERS:
-            if (is_keyboard_master()) {
-                oled_write_P("  789  456  123  0  ", false);
-            }
+            oled_clear();
+            oled_write_P("Numbs", false);
+            render_space_tlj();
+
+            oled_write_P("  789  456  123  0  ", false);
+
+            render_space_tlj();
+            render_space_tlj();
+            render_space_tlj();
+
             break;
         case _NAVI:
-            if (is_keyboard_master()) {
-                oled_write("Navi          ", false);
-            } else {
-                oled_write_P("     ", false);
-                oled_write_P(left_arrow, false);
-                oled_write_P(down_arrow, false);
-                oled_write_P(up_arrow, false);
-                oled_write_P(right_arrow, false);
-                oled_write_P(" ", false);
-                oled_write_P("     ", false);
-            }
+            oled_clear();
+            oled_write("Navi ", false);
+            render_space_tlj();
+
+            render_space_tlj();
+            render_space_tlj();
+            render_space_tlj();
+            render_space_tlj();
+
+            render_space_tlj();
+            oled_write_P(left_arrow, false);
+            oled_write_P(down_arrow, false);
+            oled_write_P(up_arrow, false);
+            oled_write_P(right_arrow, false);
+            oled_write_P(" ", false);
+            render_space_tlj();
+
             break;
         case _MEDIA:
-            if (is_keyboard_master()) {
-                oled_write("Media          ", false);
-            }
+            oled_clear();
+            oled_write("Media          ", false);
             break;
         case _MOUSE:
-            if (is_keyboard_master()) {
-                oled_write("Mouse          ", false);
-            }
+            oled_clear();
+            oled_write("Mouse          ", false);
             break;
     }
 
