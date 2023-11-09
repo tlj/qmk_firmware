@@ -82,13 +82,13 @@
         "matrix_pins": {
             "right": {
                 "rows": ["B1", "F7", "F6", "B3"],
-                "cols": ["B5", "B4", "E6", "D7", "C6"]
+                "cols": ["F11", "B4", "E6", "D7", "C6"]
             }
         },
         "encoder": {
             "right": {
                 "rotary": [
-                    {"pin_a": "B2", "pin_b": "B6"},
+                    {"pin_a": "B2", "pin_b": "F10"},
                     {"pin_a": "F5", "pin_b": "D4"}
                 ]
             }
