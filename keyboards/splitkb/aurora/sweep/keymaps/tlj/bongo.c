@@ -107,7 +107,7 @@ static void render_anim(void) {
     }
 
     if (get_current_wpm() != 000) {
-        //oled_on();
+        oled_on();
 
         if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
             anim_timer = timer_read32();
@@ -117,7 +117,7 @@ static void render_anim(void) {
         anim_sleep = timer_read32();
     } else {
         if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-            //oled_off();
+            oled_off();
         } else {
             if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
                 anim_timer = timer_read32();

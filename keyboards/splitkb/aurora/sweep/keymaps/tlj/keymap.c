@@ -241,12 +241,10 @@ bool oled_task_user(void) {
     static const char PROGMEM up_arrow[] = {0x18, 0};
     static const char PROGMEM right_arrow[] = {0x1A, 0};
 
-    oled_clear();
-    oled_set_cursor(0, 1);
+    oled_set_cursor(0, 0);
 
     switch (get_highest_layer(layer_state)) {
         case _DEFAULT:
-            oled_clear();
             render_space_tlj();
             render_space_tlj();
 
@@ -256,7 +254,6 @@ bool oled_task_user(void) {
             oled_write_P("yuiophjkl;nm,. ", false);
             break;
         case _SYMBOLS:
-            oled_clear();
             oled_write_P("Symbs", false);
             render_space_tlj();
 
@@ -267,7 +264,6 @@ bool oled_task_user(void) {
 
             break;
         case _NUMBERS:
-            oled_clear();
             oled_write_P("Numbs", false);
             render_space_tlj();
 
@@ -279,7 +275,6 @@ bool oled_task_user(void) {
 
             break;
         case _NAVI:
-            oled_clear();
             oled_write("Navi ", false);
             render_space_tlj();
 
@@ -300,10 +295,12 @@ bool oled_task_user(void) {
         case _MEDIA:
             oled_clear();
             oled_write("Media          ", false);
+            return false;
             break;
         case _MOUSE:
             oled_clear();
             oled_write("Mouse          ", false);
+            return false;
             break;
     }
 
