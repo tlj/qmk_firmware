@@ -21,7 +21,7 @@
 //#define QUICK_TAP_TERM 0
 
 #define SPLIT_USB_DETECT
-#define SPLIT_USB_TIMEOUT 250
+#define SPLIT_USB_TIMEOUT 1000
 
 // Underglow configuration
 #ifdef RGBLIGHT_ENABLE
