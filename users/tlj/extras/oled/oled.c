@@ -1,4 +1,5 @@
-#include "../animations/bongo.c"
+#include "bongo_cat.c"
+#include "mouse_pointer.c"
 #include "tlj.h"
 #include <stdio.h>
 char wpm_str[10];
@@ -149,11 +150,18 @@ void render_mod_status_ctrl_shift_tlj(uint8_t modifiers) {
 
 bool oled_task_user(void) {
     if (!is_keyboard_master()) {
-        render_anim();
-        oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
-        sprintf(wpm_str, "WPM:%03d", get_current_wpm());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
-        oled_write(wpm_str, false);
-        return false;
+        if (get_highest_layer(layer_state) == _MOUSE) {
+            oled_write_raw_P(mouse_pointer, sizeof(mouse_pointer));
+            return false;
+        } else {
+            render_anim();
+            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
+            oled_set_cursor(0, 0);
+            // edit the string to change wwhat shows up, edit %03d to change how many digits show up
+            sprintf(wpm_str, "WPM:%03d", get_current_wpm());
+            oled_write(wpm_str, false);
+            return false;
+        }
     }
 
     // A 128x32 OLED rotated 90 degrees is 5 characters wide and 16 characters tall

@@ -6,5 +6,5 @@ INTROSPECTION_KEYMAP_C = keymaps.c # keymaps
 SRC += tlj.c
 
 ifdef OLED_ENABLE
-  SRC += extras/oled.c
+  SRC += extras/oled/oled.c
 endif
