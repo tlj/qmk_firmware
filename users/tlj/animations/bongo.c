@@ -1,5 +1,5 @@
 // ObliviousGmn // Dokuu // October 2020 // Bongo Cat
-
+#include QMK_KEYBOARD_H
 #pragma once
 
 extern uint8_t is_master;
@@ -16,7 +16,6 @@ uint32_t anim_timer = 0;
 uint32_t anim_sleep = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
-
 
 // Bongo Cat
 static void render_anim(void) {
