@@ -1,6 +1,15 @@
 #include QMK_KEYBOARD_H
 #include "tlj.h"
 
+const uint32_t PROGMEM unicode_map[] = {
+    [AE_LOWER] = 0x00E6,
+    [AE_UPPER] = 0x00C6,
+    [OE_LOWER] = 0x00F8,
+    [OE_UPPER] = 0x00D8,
+    [AA_LOWER] = 0x00E5,
+    [AA_UPPER] = 0x00C5,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT(
         KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,            KC_Y,          KC_U,         KC_I,         KC_O,         KC_P,
@@ -81,3 +90,4 @@ combo_t key_combos[] = {
     COMBO(copy_combo, LGUI(KC_C)),
     COMBO(past_combo, LGUI(KC_V)),
 };
+
