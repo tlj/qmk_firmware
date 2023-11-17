@@ -25,7 +25,7 @@ enum unicode_names {
 #define KC_GUID LGUI_T(KC_D)
 #define KC_SHFF LSFT_T(KC_F)
 #define KC_GNAV LT(_NAVI,KC_G)
-#define KC_HNAV LT(_NUMBERS,KC_H)
+#define KC_HNUM LT(_NUMBERS,KC_H)
 #define KC_SHFJ RSFT_T(KC_J)
 #define KC_GUIK RGUI_T(KC_K)
 #define KC_CTRL RCTL_T(KC_L)

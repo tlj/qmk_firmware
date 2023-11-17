@@ -13,7 +13,7 @@ const uint32_t PROGMEM unicode_map[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT(
         KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,            KC_Y,          KC_U,         KC_I,         KC_O,         KC_P,
-        KC_ALTA,      KC_CTRS,      KC_GUID,      KC_SHFF,      KC_GNAV,         KC_HNAV,       KC_SHFJ,      KC_GUIK,      KC_CTRL,      KC_ALTS,
+        KC_ALTA,      KC_CTRS,      KC_GUID,      KC_SHFF,      KC_GNAV,         KC_HNUM,       KC_SHFJ,      KC_GUIK,      KC_CTRL,      KC_ALTS,
         KC_Z,         KC_X,         KC_NORC,      KC_V,         KC_B,            KC_N,          KC_M,         KC_COMM,      KC_DOT,       KC_ENT,
                                                   KC_SYMC,      KC_MEHT,         KC_MEBS,       KC_SYMC
     ),
